@@ -1,0 +1,21 @@
+[MESSAGES CONTROL]
+
+# Enable or disable specific messages
+disable=C0111, C0301, R0903
+
+[FORMAT]
+
+# Set the output format (text, parseable, colorized, json, etc.)
+output-format=text
+
+[REPORTS]
+
+# Set the maximum number of statements allowed in a function/method
+max-attributes=10
+
+# Set the maximum number of public methods in a class
+max-public-methods=20
+
+[MASTER]
+load-plugins=class_name_checker
+
