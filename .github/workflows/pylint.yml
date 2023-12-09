@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PYTHONPATH: ${{ github.workspace }}/ci-cd-pipeline-python
+      PYTHONPATH: ${{ github.workspace }}
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
