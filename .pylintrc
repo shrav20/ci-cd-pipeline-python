@@ -1,5 +1,5 @@
 [MASTER]
-load-plugins=ci-cd-pipeline-python.class_name_checker
+load-plugins=class_name_checker
 
 [MESSAGES CONTROL]
 
