@@ -1,11 +1,7 @@
 # class_name_checker.py
-from pylint.interfaces import CheckerPluginInterface
 from pylint.checkers import BaseChecker
-from pylint.checkers.utils import check_messages
 
 class ClassNameChecker(BaseChecker):
-    __implements__ = CheckerPluginInterface
-
     name = 'class-name-checker'
     priority = -1
     msgs = {
@@ -20,7 +16,7 @@ class ClassNameChecker(BaseChecker):
         class_name = node.name.lower()
         verbs = ['create', 'initialize', 'generate', 'compute']  # Add more verbs as needed
         if not any(class_name.startswith(verb) for verb in verbs):
-            check_messages(self, 'class-name-should-start-with-verb', node=node)
+            self.add_message('class-name-should-start-with-verb', node=node)
 
 def register(linter):
     linter.register_checker(ClassNameChecker(linter))
