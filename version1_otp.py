@@ -3,17 +3,17 @@
 import smtplib
 import random
 
-sender = "swanandbhuskute567@gmail.com"
-password = "gvkguusgyahnhnfe"
-receiver = "swanandtest85@gmail.com"
-body = "Your OTP is " + str(random.randint(100000, 999999)) + ". Valid for next 15 minutes."
+SENDER = "swanandbhuskute567@gmail.com"
+PASSWORD = "gvkguusgyahnhnfe"
+RECEIVER = "swanandtest85@gmail.com"
+BODY = "Your OTP is " + str(random.randint(100000, 999999)) + ". Valid for next 15 minutes."
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 
 server.starttls()
 
-server.login(sender, password)
+server.login(SENDER, PASSWORD)
 
-server.sendmail(sender, receiver, body)
+server.sendmail(SENDER, RECEIVER, BODY)
 
 print("Mail sent")
