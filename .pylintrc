@@ -1,3 +1,6 @@
+[MASTER]
+load-plugins=class_name_checker
+
 [MESSAGES CONTROL]
 
 # Enable or disable specific messages
@@ -16,6 +19,5 @@ max-attributes=10
 # Set the maximum number of public methods in a class
 max-public-methods=20
 
-[MASTER]
-load-plugins=class_name_checker.py
+
 
