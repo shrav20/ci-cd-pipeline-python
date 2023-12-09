@@ -1,9 +1,10 @@
-from pylint.interfaces import IAstroidChecker
+# class_name_checker.py
+from pylint.interfaces import CheckerPluginInterface
 from pylint.checkers import BaseChecker
 from pylint.checkers.utils import check_messages
 
 class ClassNameChecker(BaseChecker):
-    __implements__ = IAstroidChecker
+    __implements__ = CheckerPluginInterface
 
     name = 'class-name-checker'
     priority = -1
