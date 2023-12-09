@@ -17,5 +17,5 @@ max-attributes=10
 max-public-methods=20
 
 [MASTER]
-load-plugins=class_name_checker
+load-plugins=class_name_checker.py
 
