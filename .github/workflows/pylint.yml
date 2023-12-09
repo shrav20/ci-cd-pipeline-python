@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PYTHONPATH: ${{ github.workspace }}/ci-cd-pipeline-python/class_name_checker
+      PYTHONPATH: ${{ github.workspace }}/ci-cd-pipeline-python
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
@@ -21,7 +21,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
     - name: Print Directory Contents
-      run: pwd
+      run: ls -R ${{ github.workspace }}/ci-cd-pipeline-python
 
     - name: Linting
       run: pylint version1_otp.py
