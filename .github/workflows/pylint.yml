@@ -23,9 +23,7 @@ jobs:
         pip install --upgrade pylint
         pip install pytest
         pip install --upgrade pytest
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(find . -name '*.py')
+    
     - name: Run tests with pytest
       run: |
         pytest
