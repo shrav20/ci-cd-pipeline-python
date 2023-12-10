@@ -7,7 +7,6 @@ class ClassNameChecker(BaseChecker):
     msgs = {
         'C9999': (
             'Class name should start with a verb',
-            'class-name-should-start-with-verb',
             'Class names should start with a verb.'
         ),
     }
