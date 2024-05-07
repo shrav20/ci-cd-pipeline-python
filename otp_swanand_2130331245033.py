@@ -3,7 +3,7 @@ import re
 import smtplib
 from twilio.rest import Client
 
-class CommunicatingService:
+class create_communicating_service:
     def _init_(self, account_sid, auth_token, sender_email, sender_password):
         self.client = Client(account_sid, auth_token)
         self.sender_email = sender_email
@@ -16,7 +16,7 @@ class CommunicatingService:
     def send_otp(self, message, receiver):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class MobileService(CommunicatingService):
+class MobileService(create_communicating_service):
     def _init_(self, account_sid, auth_token):
         super()._init_(account_sid, auth_token, None, None)
 
@@ -37,7 +37,7 @@ class MobileService(CommunicatingService):
         else:
             print("Enter a valid mobile number!!")
 
-class EmailService(CommunicatingService):
+class EmailService(create_communicating_service):
     @staticmethod
     def validate_email(receiver):
         validation_condition = r"^[\w\.-]+@[\w\.-]+\.\w+$"
@@ -65,7 +65,7 @@ class OTPServices:
         self.mobile_service.twilio_num = twilio_num
 
     def send_otp(self, receiver, send_twilio=True, target_mobile=None):
-        generated_otp = CommunicatingService.generate_otp(6)
+        generated_otp = create_communicating_service.generate_otp(6)
 
         if send_twilio:
             self.mobile_service.send_otp(target_mobile, generated_otp)
