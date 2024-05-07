@@ -3,7 +3,7 @@ import re
 import smtplib
 from twilio.rest import Client
 
-class CommunicationService:
+class CommunicatingService:
     def _init_(self, account_sid, auth_token, sender_email, sender_password):
         self.client = Client(account_sid, auth_token)
         self.sender_email = sender_email
@@ -16,7 +16,7 @@ class CommunicationService:
     def send_otp(self, message, receiver):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class MobileService(CommunicationService):
+class MobileService(CommunicatingService):
     def _init_(self, account_sid, auth_token):
         super()._init_(account_sid, auth_token, None, None)
 
@@ -37,7 +37,7 @@ class MobileService(CommunicationService):
         else:
             print("Enter a valid mobile number!!")
 
-class EmailService(CommunicationService):
+class EmailService(CommunicatingService):
     @staticmethod
     def validate_email(receiver):
         validation_condition = r"^[\w\.-]+@[\w\.-]+\.\w+$"
@@ -65,22 +65,22 @@ class OTPServices:
         self.mobile_service.twilio_num = twilio_num
 
     def send_otp(self, receiver, send_twilio=True, target_mobile=None):
-        generated_otp = CommunicationService.generate_otp(6)
+        generated_otp = CommunicatingService.generate_otp(6)
 
         if send_twilio:
             self.mobile_service.send_otp(target_mobile, generated_otp)
 
         self.email_service.send_otp(receiver, generated_otp)
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     print("Welcome to Random OTP sender!!\nHere, we send random OTPs to phone number and mails.\n")
-
+    #pylint: disable=W0621
     account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'
     auth_token_value = '1fbcb17dfe649c3d4476b8d0330e07dc'
     twilio_number = '+15735944610'
     sender_email = "swanandbhuskute567@gmail.com"
     sender_password = "gvkguusgyahnhnfe"
-
+    #pylint: enable=W0621
     otp_services = OTPServices(account_sid_value, auth_token_value, twilio_number, sender_email, sender_password)
 
     receiver_email = input("Enter mail: ")
