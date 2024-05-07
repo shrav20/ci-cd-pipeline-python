@@ -92,5 +92,5 @@ if _name_ == "_main_":
     else:
         otp_services.send_otp(receiver_email, send_twilio=False)
 
-    print("\nOTP sending program ended\n")
+    # print("\nOTP sending program ended\n")
     # Program Ended
