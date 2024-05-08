@@ -1,6 +1,6 @@
 import random
 import re
-import os
+#import os
 import smtplib
 from twilio.rest import Client
 
