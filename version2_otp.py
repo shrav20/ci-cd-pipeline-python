@@ -17,18 +17,18 @@ class ComputeOTPFunctions(unittest.TestCase):
 
     def test_validate_emailid(self):
         """Test validate Email."""
-        result = otp.EmailService.validate_email("test@gmail.com")
+        result = otp.CreateEmailService.validate_email("test@gmail.com")
         expected = True
 
         self.assertEqual(result, expected)
 
-        result = otp.EmailService.validate_email("test@dbatu.ac.in")
+        result = otp.CreateEmailService.validate_email("test@dbatu.ac.in")
         self.assertEqual(result, expected)
 
     def test_validate_mobile(self):
         """Test validate Mobile number."""
         mobile = "8625847883"
-        result = otp.MobileService.validate_mobile(mobile)
+        result = otp.CreateMobileService.validate_mobile(mobile)
         expected = True
 
         self.assertEqual(result, expected)

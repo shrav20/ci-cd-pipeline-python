@@ -54,7 +54,7 @@ class CreateEmailService(CreateCommunicatingService):
         else:
             print("Please enter a valid email!!")
 
-class OTPServices:
+class GenerateOTPServices:
     def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
         self.mobile_service = CreateMobileService(account_sid, auth_token)
         self.email_service = CreateEmailService(account_sid, auth_token)
@@ -83,7 +83,7 @@ if __name__ == "_main_":
     sender_email = "swanandbhuskute567@gmail.com"
     sender_password = "gvkguusgyahnhnfe"
     #pylint: enable=W0621
-    otp_services = OTPServices(account_sid_value, auth_token_value, twilio_number, sender_email, sender_password)
+    otp_services = GenerateOTPServices(account_sid_value, auth_token_value, twilio_number, sender_email, sender_password)
 
     receiver_email = input("Enter mail: ")
     send_twilio = input("\nDo you want to send OTP via SMS: ")
