@@ -16,7 +16,7 @@ class CreateCommunicatingService:
     def send_otp(self, message, receiver):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class CreateMobileService(CreateCommunicatingService):
+class CreateMobileService(CreateCommunicatingService):  
     def __init__(self, account_sid, auth_token):
         super().__init__(account_sid, auth_token, None, None)
 
@@ -43,7 +43,7 @@ class CreateEmailService(CreateCommunicatingService):
         validation_condition = r"^[\w\.-]+@[\w\.-]+\.\w+$"
         return bool(re.search(validation_condition, receiver))
 
-    def send_otp(self, receiver_email, otp):  # Changed 'message' to 'receiver_email', 'receiver' to 'otp'
+    def send_otp(self, receiver_email, otp):  # pylint: disable=arguments-renamed
         if self.validate_email(receiver_email):
             body = f"Your OTP is {otp}. Valid for next 15 minutes."
             server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -57,7 +57,9 @@ class CreateEmailService(CreateCommunicatingService):
 class GenerateOTPServices:
     def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
         self.mobile_service = CreateMobileService(account_sid, auth_token)
-        self.email_service = CreateEmailService(account_sid, auth_token, sender_email, sender_password)  # Pass sender_email and sender_password here
+        self.email_service = CreateEmailService(account_sid, auth_token)
+        self.sender_email = sender_email
+        self.sender_password = sender_password
         self.mobile_service.sender_email = sender_email
         self.email_service.sender_email = sender_email
         self.mobile_service.sender_password = sender_password
@@ -72,7 +74,7 @@ class GenerateOTPServices:
 
         self.email_service.send_otp(receiver, generated_otp)
 
-if __name__ == "__main__":  # Corrected "__main__" instead of "_main_"
+if __name__ == "__main__":
     print("Welcome to Random OTP sender!!\nHere, we send random OTPs to phone number and mails.\n")
     # pylint: disable=W0621
     account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'  # pylint: disable=C0103
