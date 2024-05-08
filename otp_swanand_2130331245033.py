@@ -43,7 +43,7 @@ class CreateEmailService(CreateCommunicatingService):
         validation_condition = r"^[\w\.-]+@[\w\.-]+\.\w+$"
         return bool(re.search(validation_condition, receiver))
 
-    def send_otp(self, receiver_email, otp):
+    def send_otp(self, receiver_email, otp):  # Changed 'message' to 'receiver_email', 'receiver' to 'otp'
         if self.validate_email(receiver_email):
             body = f"Your OTP is {otp}. Valid for next 15 minutes."
             server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -57,9 +57,7 @@ class CreateEmailService(CreateCommunicatingService):
 class GenerateOTPServices:
     def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
         self.mobile_service = CreateMobileService(account_sid, auth_token)
-        self.email_service = CreateEmailService(account_sid, auth_token)
-        self.sender_email = sender_email
-        self.sender_password = sender_password
+        self.email_service = CreateEmailService(account_sid, auth_token, sender_email, sender_password)  # Pass sender_email and sender_password here
         self.mobile_service.sender_email = sender_email
         self.email_service.sender_email = sender_email
         self.mobile_service.sender_password = sender_password
@@ -71,18 +69,18 @@ class GenerateOTPServices:
 
         if send_twilio:
             self.mobile_service.send_otp(target_mobile, generated_otp)
-        else:
-            self.email_service.send_otp(receiver, generated_otp)
 
-if __name__ == "__main__":
+        self.email_service.send_otp(receiver, generated_otp)
+
+if __name__ == "__main__":  # Corrected "__main__" instead of "_main_"
     print("Welcome to Random OTP sender!!\nHere, we send random OTPs to phone number and mails.\n")
-    # pylint: disable=W0621,C0103
-    account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'
-    auth_token_value = '1fbcb17dfe649c3d4476b8d0330e07dc'
-    twilio_number = '+15735944610'
-    sender_email = "swanandbhuskute567@gmail.com"
-    sender_password = "gvkguusgyahnhnfe"
-    # pylint: enable=W0621,C0103
+    # pylint: disable=W0621
+    account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'  # pylint: disable=C0103
+    auth_token_value = '1fbcb17dfe649c3d4476b8d0330e07dc'  # pylint: disable=C0103
+    twilio_number = '+15735944610'  # pylint: disable=C0103
+    sender_email = "swanandbhuskute567@gmail.com"  # pylint: disable=C0103
+    sender_password = "gvkguusgyahnhnfe"  # pylint: disable=C0103
+    # pylint: enable=W0621
     otp_services = GenerateOTPServices(account_sid_value, auth_token_value, twilio_number, sender_email, sender_password)
 
     receiver_email = input("Enter mail: ")
