@@ -19,5 +19,6 @@ max-attributes=10
 # Set the maximum number of public methods in a class
 max-public-methods=20
 
-
+# Disable specific error messages
+disable=W0621,C0103
 
