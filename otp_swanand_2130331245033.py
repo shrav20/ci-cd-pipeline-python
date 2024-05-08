@@ -16,7 +16,7 @@ class CreateCommunicatingService:
     def send_otp(self, message, receiver):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class MobileService(CreateCommunicatingService):
+class CreateMobileService(CreateCommunicatingService):
     def __init__(self, account_sid, auth_token):
         super().__init__(account_sid, auth_token, None, None)
 
@@ -24,7 +24,7 @@ class MobileService(CreateCommunicatingService):
     def validate_mobile(mobile):
         return len(mobile) == 10 and mobile.isdigit()
 
-    def send_otp(self, target_mobile, otp):
+    def send_otp(self, target_mobile, otp):   # pylint: disable=arguments-renamed
         if self.validate_mobile(target_mobile):
             target_mobile = "+91" + target_mobile
             message = self.client.messages.create(
@@ -37,7 +37,7 @@ class MobileService(CreateCommunicatingService):
         else:
             print("Enter a valid mobile number!!")
 
-class EmailService(CreateCommunicatingService):
+class CreateEmailService(CreateCommunicatingService):
     @staticmethod
     def validate_email(receiver):
         validation_condition = r"^[\w\.-]+@[\w\.-]+\.\w+$"
@@ -56,8 +56,10 @@ class EmailService(CreateCommunicatingService):
 
 class OTPServices:
     def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
-        self.mobile_service = MobileService(account_sid, auth_token)
-        self.email_service = EmailService(account_sid, auth_token)
+        self.mobile_service = CreateMobileService(account_sid, auth_token)
+        self.email_service = CreateEmailService(account_sid, auth_token)
+        self.sender_email=sender_email
+        self.sender_password=sender_password
         self.mobile_service.sender_email = sender_email
         self.email_service.sender_email = sender_email
         self.mobile_service.sender_password = sender_password
