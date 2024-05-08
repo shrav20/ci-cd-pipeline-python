@@ -1,7 +1,6 @@
 import random
 import re
 import smtplib
-import twilio.rest
 from twilio.rest import Client
 
 class CreateCommunicatingService:
