@@ -4,10 +4,10 @@ import smtplib
 from twilio.rest import Client
 
 class CreateCommunicatingService:
-    def __init__(self, account_sid, auth_token, sender_email, sender_password):
-        self.client = Client(account_sid, auth_token)
-        self.sender_email = sender_email
-        self.sender_password = sender_password
+    def __init__(self, ACCOUNT_SID, AUTH_TOKEN, SENDER_EMAIL, SENDER_PASSWORD):
+        self.client = Client(ACCOUNT_SID, AUTH_TOKEN)
+        self.sender_email = SENDER_EMAIL
+        self.sender_password = SENDER_PASSWORD
 
     @staticmethod
     def generate_otp(n=6):
@@ -17,8 +17,8 @@ class CreateCommunicatingService:
         raise NotImplementedError("Subclasses must implement this method.")
 
 class CreateMobileService(CreateCommunicatingService):
-    def __init__(self, account_sid, auth_token):
-        super().__init__(account_sid, auth_token, None, None)
+    def __init__(self, ACCOUNT_SID, AUTH_TOKEN):
+        super().__init__(ACCOUNT_SID, AUTH_TOKEN, None, None)
 
     @staticmethod
     def validate_mobile(mobile):
@@ -55,16 +55,16 @@ class CreateEmailService(CreateCommunicatingService):
             print("Please enter a valid email!!")
 
 class GenerateOTPServices:
-    def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
-        self.mobile_service = CreateMobileService(account_sid, auth_token)
-        self.email_service = CreateEmailService(account_sid, auth_token)
-        self.sender_email=sender_email
-        self.sender_password=sender_password
-        self.mobile_service.sender_email = sender_email
-        self.email_service.sender_email = sender_email
-        self.mobile_service.sender_password = sender_password
-        self.email_service.sender_password = sender_password
-        self.mobile_service.twilio_num = twilio_num
+    def __init__(self, ACCOUNT_SID, AUTH_TOKEN, TWILIO_NUMBER, SENDER_EMAIL, SENDER_PASSWORD):
+        self.mobile_service = CreateMobileService(ACCOUNT_SID, AUTH_TOKEN)
+        self.email_service = CreateEmailService(ACCOUNT_SID, AUTH_TOKEN)
+        self.SENDER_EMAIL = SENDER_EMAIL
+        self.SENDER_PASSWORD = SENDER_PASSWORD
+        self.mobile_service.sender_email = SENDER_EMAIL
+        self.email_service.sender_email = SENDER_EMAIL
+        self.mobile_service.sender_password = SENDER_PASSWORD
+        self.email_service.sender_password = SENDER_PASSWORD
+        self.mobile_service.twilio_num = TWILIO_NUMBER
 
     def send_otp(self, receiver, send_twilio=True, target_mobile=None):
         generated_otp = CreateCommunicatingService.generate_otp(6)
@@ -77,13 +77,13 @@ class GenerateOTPServices:
 if __name__ == "_main_":
     print("Welcome to Random OTP sender!!\nHere, we send random OTPs to phone number and mails.\n")
     #pylint: disable=W0621
-    account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'
-    auth_token_value = '1fbcb17dfe649c3d4476b8d0330e07dc'
-    twilio_number = '+15735944610'
-    sender_email = "swanandbhuskute567@gmail.com"
-    sender_password = "gvkguusgyahnhnfe"
+    ACCOUNT_SID = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'
+    AUTH_TOKEN = '1fbcb17dfe649c3d4476b8d0330e07dc'
+    TWILIO_NUMBER = '+15735944610'
+    SENDER_EMAIL = "swanandbhuskute567@gmail.com"
+    SENDER_PASSWORD = "gvkguusgyahnhnfe"
     #pylint: enable=W0621
-    otp_services = GenerateOTPServices(account_sid_value, auth_token_value, twilio_number, sender_email, sender_password)
+    otp_services = GenerateOTPServices(ACCOUNT_SID, AUTH_TOKEN, TWILIO_NUMBER, SENDER_EMAIL, SENDER_PASSWORD)
 
     receiver_email = input("Enter mail: ")
     send_twilio = input("\nDo you want to send OTP via SMS: ")
@@ -93,6 +93,3 @@ if __name__ == "_main_":
         otp_services.send_otp(receiver_email, send_twilio=True, target_mobile=target_mobile)
     else:
         otp_services.send_otp(receiver_email, send_twilio=False)
-
-    # print("\nOTP sending program ended\n")
-    # Program Ended
