@@ -43,7 +43,7 @@ class CreateEmailService(CreateCommunicatingService):
         validation_condition = r"^[\w\.-]+@[\w\.-]+\.\w+$"
         return bool(re.search(validation_condition, receiver))
 
-    def send_otp(self, receiver_email, otp):
+    def send_otp(self, receiver_email, otp):   # pylint: disable=arguments-renamed
         if self.validate_email(receiver_email):
             body = f"Your OTP is {otp}. Valid for next 15 minutes."
             server = smtplib.SMTP('smtp.gmail.com', 587)
