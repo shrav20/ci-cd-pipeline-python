@@ -3,8 +3,8 @@ import re
 import smtplib
 from twilio.rest import Client
 
-class create_communicating_service:
-    def _init_(self, account_sid, auth_token, sender_email, sender_password):
+class CreateCommunicatingService:
+    def __init__(self, account_sid, auth_token, sender_email, sender_password):
         self.client = Client(account_sid, auth_token)
         self.sender_email = sender_email
         self.sender_password = sender_password
@@ -16,9 +16,9 @@ class create_communicating_service:
     def send_otp(self, message, receiver):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class MobileService(create_communicating_service):
-    def _init_(self, account_sid, auth_token):
-        super()._init_(account_sid, auth_token, None, None)
+class MobileService(CreateCommunicatingService):
+    def __init__(self, account_sid, auth_token):
+        super().__init__(account_sid, auth_token, None, None)
 
     @staticmethod
     def validate_mobile(mobile):
@@ -37,7 +37,7 @@ class MobileService(create_communicating_service):
         else:
             print("Enter a valid mobile number!!")
 
-class EmailService(create_communicating_service):
+class EmailService(CreateCommunicatingService):
     @staticmethod
     def validate_email(receiver):
         validation_condition = r"^[\w\.-]+@[\w\.-]+\.\w+$"
@@ -55,7 +55,7 @@ class EmailService(create_communicating_service):
             print("Please enter a valid email!!")
 
 class OTPServices:
-    def _init_(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
+    def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
         self.mobile_service = MobileService(account_sid, auth_token)
         self.email_service = EmailService(account_sid, auth_token)
         self.mobile_service.sender_email = sender_email
@@ -65,7 +65,7 @@ class OTPServices:
         self.mobile_service.twilio_num = twilio_num
 
     def send_otp(self, receiver, send_twilio=True, target_mobile=None):
-        generated_otp = create_communicating_service.generate_otp(6)
+        generated_otp = CreateCommunicatingService.generate_otp(6)
 
         if send_twilio:
             self.mobile_service.send_otp(target_mobile, generated_otp)

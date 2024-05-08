@@ -33,6 +33,6 @@ class TestOTPFunctions(unittest.TestCase):
         result = otp.validateMobile(mobile)
         expected = True
 
-        self.assertEqual(result, expected) 
+        self.assertEqual(result, expected)
 if __name__ == "__main__":
     pytest.main()
