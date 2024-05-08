@@ -16,7 +16,7 @@ class CreateCommunicatingService:
     def send_otp(self, message, receiver):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class CreateMobileService(CreateCommunicatingService):  
+class CreateMobileService(CreateCommunicatingService):
     def __init__(self, account_sid, auth_token):
         super().__init__(account_sid, auth_token, None, None)
 
@@ -58,8 +58,8 @@ class GenerateOTPServices:
     def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
         self.mobile_service = CreateMobileService(account_sid, auth_token)
         self.email_service = CreateEmailService(account_sid, auth_token)
-        self.sender_email=sender_email
-        self.sender_password=sender_password
+        self.sender_email = sender_email
+        self.sender_password = sender_password
         self.mobile_service.sender_email = sender_email
         self.email_service.sender_email = sender_email
         self.mobile_service.sender_password = sender_password
@@ -71,10 +71,10 @@ class GenerateOTPServices:
 
         if send_twilio:
             self.mobile_service.send_otp(target_mobile, generated_otp)
+        else:
+            self.email_service.send_otp(receiver, generated_otp)
 
-        self.email_service.send_otp(receiver, generated_otp)
-
-if __name__ == "_main_":
+if __name__ == "__main__":
     print("Welcome to Random OTP sender!!\nHere, we send random OTPs to phone number and mails.\n")
     # pylint: disable=W0621
     account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'  # pylint: disable=C0103
@@ -93,6 +93,3 @@ if __name__ == "_main_":
         otp_services.send_otp(receiver_email, send_twilio=True, target_mobile=target_mobile)
     else:
         otp_services.send_otp(receiver_email, send_twilio=False)
-
-    # print("\nOTP sending program ended\n")
-    # Program Ended
