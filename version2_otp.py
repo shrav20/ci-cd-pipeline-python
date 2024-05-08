@@ -1,9 +1,7 @@
 # Import your functions here
-
-import pytest
 import otp_swanand_2130331245033 as otp
 import unittest
-
+import pytest
 
 class ComputeOTPFunctions(unittest.TestCase):
 
@@ -17,7 +15,7 @@ class ComputeOTPFunctions(unittest.TestCase):
 
         self.assertEqual(len(result), expected_len)
         self.assertEqual(result_isint, expected_isint)
-    def test_validate_emailiD(self):
+    def test_validate_emailid(self):
         """Test validate Email."""
         result = otp.validate_email("test@gmail.com")
         expected = True
