@@ -76,13 +76,13 @@ class GenerateOTPServices:
 
 if __name__ == "__main__":
     print("Welcome to Random OTP sender!!\nHere, we send random OTPs to phone number and mails.\n")
-    # pylint: disable=W0621
-    account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'  # pylint: disable=C0103
-    auth_token_value = '1fbcb17dfe649c3d4476b8d0330e07dc'  # pylint: disable=C0103
-    twilio_number = '+15735944610'  # pylint: disable=C0103
-    sender_email = "swanandbhuskute567@gmail.com"  # pylint: disable=C0103
-    sender_password = "gvkguusgyahnhnfe"  # pylint: disable=C0103
-    # pylint: enable=W0621
+    # pylint: disable=W0621,C0103
+    account_sid_value = 'AC1a01a4fd1cc7cdbb358e19fe12b9ce93'
+    auth_token_value = '1fbcb17dfe649c3d4476b8d0330e07dc'
+    twilio_number = '+15735944610'
+    sender_email = "swanandbhuskute567@gmail.com"
+    sender_password = "gvkguusgyahnhnfe"
+    # pylint: enable=W0621,C0103
     otp_services = GenerateOTPServices(account_sid_value, auth_token_value, twilio_number, sender_email, sender_password)
 
     receiver_email = input("Enter mail: ")
