@@ -5,11 +5,11 @@ import otp_swanand_2130331245033 as otp
 import unittest
 
 
-class TestOTPFunctions(unittest.TestCase):
+class ComputeOTPFunctions(unittest.TestCase):
 
-    def test_generateOtp(self):
+    def test_generate_otp(self):
         """Test the generateOtp function."""
-        result = otp.generateOtp(8)
+        result = otp.generate_otp(8)
         expected_len = 8
 
         result_isint = result.isdigit()
@@ -17,20 +17,20 @@ class TestOTPFunctions(unittest.TestCase):
 
         self.assertEqual(len(result), expected_len)
         self.assertEqual(result_isint, expected_isint)
-    def test_validateEmailID(self):
+    def test_validate_emailiD(self):
         """Test validate Email."""
-        result = otp.validateEmailID("test@gmail.com")
+        result = otp.validate_email("test@gmail.com")
         expected = True
 
         self.assertEqual(result, expected)
 
-        result = otp.validateEmailID("test@dbatu.ac.in")
+        result = otp.validate_email("test@dbatu.ac.in")
 
         self.assertEqual(result, expected)
-    def test_validateMobile(self):
+    def test_validate_mobile(self):
         """Test validate Mobile number."""
         mobile = "8625847883"
-        result = otp.validateMobile(mobile)
+        result = otp.validate_mobile(mobile)
         expected = True
 
         self.assertEqual(result, expected)
