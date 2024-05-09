@@ -60,6 +60,12 @@ class CreateEmailService(CreateCommunicatingService):
 
 class GenerateOTPServices:
     def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
+        self.account_sid = account_sid
+        self.auth_token = auth_token
+        self.twilio_num = twilio_num
+        self.sender_email = sender_email
+        self.sender_password = sender_password
+        
         self.mobile_service = CreateMobileService(account_sid, auth_token)
         self.email_service = CreateEmailService(account_sid, auth_token, sender_email, sender_password)  # Pass sender_email and sender_password here
         self.mobile_service.sender_email = sender_email
