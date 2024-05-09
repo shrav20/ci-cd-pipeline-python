@@ -1,7 +1,9 @@
-import streamlit as st
+# pylint: disable=wrong-import-order
 import random
 import re
 import smtplib
+# pylint: enable=wrong-import-order
+import streamlit as st
 
 class CreateCommunicatingService:
     def __init__(self, sender_email, sender_password):
@@ -30,18 +32,14 @@ class CreateEmailService(CreateCommunicatingService):
             server.login(self.sender_email, self.sender_password)
             server.sendmail(self.sender_email, receiver_email, body)
             return otp
-        else:
-            return None
+        return None
 
 class VerifyOTPServices:
     def __init__(self, sender_email, sender_password):
         self.email_service = CreateEmailService(sender_email, sender_password)
 
     def verify_otp(self, entered_otp, generated_otp):
-        if generated_otp == entered_otp:
-            return True
-        else:
-            return False
+        return generated_otp == entered_otp
 
 def main():
     st.title("OTP Verification")
