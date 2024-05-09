@@ -2,7 +2,10 @@ import random
 import re
 #import os
 import smtplib
+# pylint: disable=import-error
 from twilio.rest import Client
+# pylint: enable=import-error
+
 
 class CreateCommunicatingService:
     def __init__(self, account_sid, auth_token, sender_email, sender_password):
