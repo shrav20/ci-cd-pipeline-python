@@ -59,7 +59,12 @@ class CreateEmailService(CreateCommunicatingService):
             print("Please enter a valid email!!")
 
 class GenerateOTPServices:
-    def __init__(self, account_sid, auth_token, twilio_num, sender_email, sender_password):
+    def __init__(self,config):
+        self.account_sid = config.get('account_sid')
+        self.auth_token = config.get('auth_token')
+        self.twilio_num = config.get('twilio_num')
+        self.sender_email = config.get('sender_email')
+        self.sender_password = config.get('sender_password')
         self.mobile_service = CreateMobileService(account_sid, auth_token)
         self.email_service = CreateEmailService(account_sid, auth_token, sender_email, sender_password)  # Pass sender_email and sender_password here
         self.mobile_service.sender_email = sender_email
