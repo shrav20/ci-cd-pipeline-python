@@ -27,6 +27,7 @@ class CreateEmailService(CreateCommunicatingService):
         return bool(re.search(validation_condition, receiver))
 
     def send_otp(self, receiver_email):
+        # pylint: disable=duplicate-code
         if self.validate_email(receiver_email):
             otp = self.generate_otp()
             body = f"Your OTP is {otp}. Valid for next 15 minutes."
@@ -34,7 +35,6 @@ class CreateEmailService(CreateCommunicatingService):
             server.starttls()
             server.login(self.sender_email, self.sender_password)
             server.sendmail(self.sender_email, receiver_email, body)
-            # pylint: disable=duplicate-code
             return otp
         return None
 
