@@ -34,6 +34,7 @@ class CreateEmailService(CreateCommunicatingService):
             server.starttls()
             server.login(self.sender_email, self.sender_password)
             server.sendmail(self.sender_email, receiver_email, body)
+            # pylint: disable=duplicate-code
             return otp
         return None
 
