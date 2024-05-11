@@ -44,4 +44,4 @@ jobs:
         python -m pip install streamlit
     - name: Deploy Streamlit App
       run: |
-        streamlit deploy otp_app.py --app ci-cd-python
+        streamlit run otp_app.py --server.headless true --server.port $PORT --server.enableCORS false --browser.serverAddress '0.0.0.0' --browser.gatherUsageStats false --server.baseUrlPath ${{ env.STREAMLIT_BASE_PATH }} --server.enableXsrfProtection false --server.runOnSave true --server.enableWebsocketCompression false
