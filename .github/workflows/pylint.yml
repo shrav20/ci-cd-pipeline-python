@@ -23,6 +23,7 @@ jobs:
         pip install --upgrade pylint
         pip install pytest
         pip install --upgrade pytest
+        pip install twilio  # Install twilio library
     - name: Analysing the code with pylint
       run: |
         pylint $(find . -name '*.py')
