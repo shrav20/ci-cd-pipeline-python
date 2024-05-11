@@ -30,3 +30,11 @@ jobs:
     - name: Run tests with pytest
       run: |
         pytest
+    
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy Streamlit App
+      run: |
+        streamlit deploy otp_app.py --app ci-cd-python
