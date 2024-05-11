@@ -6,7 +6,7 @@ import smtplib
 from twilio.rest import Client
 # pylint: enable=import-error
 
-
+# pylint: disable=duplicate-code
 class CreateCommunicatingService:
     def __init__(self, account_sid, auth_token, sender_email, sender_password):
         self.client = Client(account_sid, auth_token)

@@ -1,7 +1,7 @@
 import unittest
 import pytest
 import test_otp_swanand_2130331245033 as otp
-
+# pylint: disable=duplicate-code
 class ComputeOTPFunctions(unittest.TestCase):
 
     def test_generate_otp_function(self):
