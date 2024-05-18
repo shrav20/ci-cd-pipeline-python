@@ -42,6 +42,7 @@ jobs:
     - name: Install Streamlit
       run: |
         python -m pip install streamlit
-    - name: Deploy Streamlit App
+    - name: Deploy to Streamlit Cloud
       run: |
-        streamlit run otp_app.py --server.headless true --server.port $PORT --server.baseUrlPath ${{ env.STREAMLIT_BASE_PATH }} --server.enableXsrfProtection false --server.runOnSave true --server.enableWebsocketCompression false
+        streamlit login
+        streamlit deploy --app ci-cd-python
