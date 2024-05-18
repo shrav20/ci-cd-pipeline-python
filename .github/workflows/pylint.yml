@@ -44,5 +44,4 @@ jobs:
         python -m pip install streamlit
     - name: Deploy to Streamlit Cloud
       run: |
-        streamlit login
-        streamlit deploy --app ci-cd-python
+        streamlit deploy --app ci-cd-python --source otp_app.py
