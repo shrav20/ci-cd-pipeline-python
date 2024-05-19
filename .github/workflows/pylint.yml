@@ -44,4 +44,4 @@ jobs:
         python -m pip install streamlit
     - name: Deploy to Streamlit Cloud
       run: |
-        streamlit deploy --app ci-cd-python --source otp_app.py
+        streamlit run otp_app.py --server.headless true
