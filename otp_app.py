@@ -68,6 +68,7 @@ def main():
             otp_verifier = VerifyOTPServices(sender_email, sender_password)
             if otp_verifier.verify_otp(entered_otp, session_state.generated_otp):
                 st.write("OTP verified successfully!")
+                st.write("and here we go")
             else:
                 st.write("OTP verification failed. Please check your OTP and try again.")
         else:
