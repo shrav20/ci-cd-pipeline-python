@@ -3,7 +3,7 @@ name: Pylint
 on: [push]
 
 jobs:
-build and lint:
+  lint:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}
@@ -30,8 +30,8 @@ build and lint:
         run: |
           pylint $(find . -name '*.py')
 
-test:
-    needs: build and lint
+  test:
+    needs: lint
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}
