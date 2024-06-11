@@ -27,6 +27,9 @@ jobs:
           pip install pylint
           pip install --upgrade pylint
           pip install twilio  # Install twilio library
+      - name: List Python files
+        run: |
+          find . -name '*.py'
       - name: Analysing the code with pylint
         run: |
           pylint $(find . -name '*.py')
