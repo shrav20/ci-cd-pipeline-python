@@ -3,7 +3,7 @@ name: Pylint
 on: [push]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}
@@ -11,28 +11,45 @@ jobs:
       matrix:
         python-version: ["3.9"]
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-        pip install --upgrade pylint
-        pip install pytest
-        pip install --upgrade pytest
-        pip install twilio  # Install twilio library
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(find . -name '*.py')
-    - name: Run tests with pytest
-      run: |
-        pytest
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          pip install --upgrade pylint
+          pip install twilio  # Install twilio library
+      - name: Analysing the code with pylint
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          pylint $(find . -name '*.py')
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install --upgrade pytest
+      - name: Run tests with pytest
+        run: |
+          pytest
     
   deploy:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
