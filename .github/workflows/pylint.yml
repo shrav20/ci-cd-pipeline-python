@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v3
 
   lint:
-    needs: source
+    needs: build
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}
