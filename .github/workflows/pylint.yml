@@ -3,7 +3,7 @@ name: Pylint
 on: [push]
 
 jobs:
-  lint:
+build and lint:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}
@@ -21,6 +21,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint
           pip install --upgrade pylint
+          pip install pytest
+          pip install --upgrade pytest
           pip install twilio  # Install twilio library
       - name: Analysing the code with pylint
         env:
@@ -28,8 +30,8 @@ jobs:
         run: |
           pylint $(find . -name '*.py')
 
-  test:
-    needs: lint
+test:
+    needs: build and lint
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: ${{ github.workspace }}
