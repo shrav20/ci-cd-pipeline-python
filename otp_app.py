@@ -5,6 +5,7 @@ import smtplib
 # pylint: enable=wrong-import-order
 # pylint: disable=import-error
 import streamlit as st
+import os
 # pylint: enable=import-error
 
 
@@ -51,8 +52,11 @@ def main():
     # Initialize session state
     session_state = st.session_state
 
-    sender_email = "swanandbhuskute567@gmail.com"
-    sender_password = "gvkguusgyahnhnfe"
+    sender_email = os.getenv('SENDER_EMAIL')
+    sender_password = os.getenv('SENDER_PASSWORD')
+    if not sender_email or not sender_password:
+        st.error("Email credentials are not set. Please set SENDER_EMAIL and SENDER_PASSWORD environment variables.")
+        return
 
     receiver_email = st.text_input("Enter your email:")
     if st.button("Send OTP"):
