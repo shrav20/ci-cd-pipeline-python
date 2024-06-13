@@ -4,8 +4,8 @@ import re
 import smtplib
 # pylint: enable=wrong-import-order
 # pylint: disable=import-error
-import streamlit as st
 import os
+import streamlit as st
 # pylint: enable=import-error
 
 
